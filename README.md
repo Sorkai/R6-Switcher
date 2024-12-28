@@ -1,9 +1,11 @@
-# R6-Switcher 游戏版本切换与启动工具
+# R6-Switcher 彩虹六号围攻 游戏版本切换与启动工具
 
 [English version](README.en-US.md)
 
 ## 项目简介
 该项目是一个用 C++ 编写的小工具，用于在 Steam 和 Uplay 版本的彩虹六号围攻（Rainbow Six Siege）之间切换 `defaultargs.dll` 文件，并提供直接启动游戏的功能。工具通过读取和修改配置文件实现版本切换，同时支持更新 `defaultargs.dll` 文件到相应的程序目录。
+
+[版本发布、国内下载及问题反馈](https://www.sorkai.com/?p=228)
 
 ---
 
