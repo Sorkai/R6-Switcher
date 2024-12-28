@@ -1,9 +1,11 @@
-# R6-Switcher: Game Version Switching and Launching Tool
+# R6-Switcher: Rainbow Six Siege Game Version Switching and Launching Tool
 
 [中文版本](README.md)
 
 ## Project Introduction
 This project is a small tool written in C++ for switching between the Steam and Uplay versions of Rainbow Six Siege by replacing the `defaultargs.dll` file. The tool also provides the ability to directly launch the game. It achieves version switching by reading and modifying a configuration file and supports updating the `defaultargs.dll` file to the corresponding program directory.
+
+[Releases, other downloads and feedback](https://www.sorkai.com/?p=228)
 
 ---
 
