@@ -5,20 +5,21 @@
 #include <cstdlib>
 #include <limits>
 
+using namespace std;
 namespace fs = std::filesystem;
 
 // 读取配置文件的函数
-bool readConfig(const std::string &configPath, std::string &gamePath, std::string &edition)
+bool readConfig(const string &configPath, string &gamePath, string &edition)
 {
-    std::ifstream configFile(configPath);
+    ifstream configFile(configPath);
     if (!configFile.is_open())
     {
-        std::cerr << "无法打开配置文件: " << configPath << std::endl;
+        cerr << "无法打开配置文件: " << configPath << endl;
         return false;
     }
 
-    std::string line;
-    while (std::getline(configFile, line))
+    string line;
+    while (getline(configFile, line))
     {
         if (line.find("game_path=") == 0)
         {
@@ -39,29 +40,29 @@ bool readConfig(const std::string &configPath, std::string &gamePath, std::strin
 }
 
 // 将版本写回配置文件的函数
-bool writeEdition(const std::string &configPath, const std::string &gamePath, const std::string &edition)
+bool writeEdition(const string &configPath, const string &gamePath, const string &edition)
 {
     try
     {
-        std::ofstream configFile(configPath, std::ios::trunc);
+        ofstream configFile(configPath, ios::trunc);
         if (!configFile.is_open())
         {
-            throw std::ios_base::failure("无法打开文件");
+            throw ios_base::failure("无法打开文件");
         }
         configFile << "game_path=\"" << gamePath << "\"\n";
-        configFile << "edition=" << edition << std::endl;
+        configFile << "edition=" << edition << endl;
         configFile.close();
         return true;
     }
-    catch (const std::exception &e)
+    catch (const exception &e)
     {
-        std::cerr << "写入配置文件时出错: " << e.what() << std::endl;
+        cerr << "写入配置文件时出错: " << e.what() << endl;
         return false;
     }
 }
 
 // 复制 DLL 文件的函数
-bool copyDLL(const std::string &source, const std::string &destination)
+bool copyDLL(const string &source, const string &destination)
 {
     try
     {
@@ -72,21 +73,21 @@ bool copyDLL(const std::string &source, const std::string &destination)
         fs::copy_file(source, destination, fs::copy_options::overwrite_existing);
         return true;
     }
-    catch (const std::exception &e)
+    catch (const exception &e)
     {
-        std::cerr << "复制文件时出错: " << e.what() << std::endl;
+        cerr << "复制文件时出错: " << e.what() << endl;
         return false;
     }
 }
 
 // 获取用户选择的版本
-std::string getEditionFromUser()
+string getEditionFromUser()
 {
     int editionChoice;
     while (true)
     {
-        std::cout << "请选择版本:\n1. steam\n2. uplay\n请输入选项 (1 或 2): ";
-        if (std::cin >> editionChoice)
+        cout << "请选择版本:\n1. steam\n2. uplay\n请输入选项 (1 或 2): ";
+        if (cin >> editionChoice)
         {
             if (editionChoice == 1)
             {
@@ -98,22 +99,22 @@ std::string getEditionFromUser()
             }
             else
             {
-                std::cerr << "无效的选择，请重新输入。" << std::endl;
+                cerr << "无效的选择，请重新输入。" << endl;
             }
         }
         else
         {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cerr << "无效输入，请输入数字 1 或 2。" << std::endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "无效输入，请输入数字 1 或 2。" << endl;
         }
     }
 }
 
 // 启动游戏函数
-void launchGame(const std::string &edition)
+void launchGame(const string &edition)
 {
-    std::string launchCommand;
+    string launchCommand;
     if (edition == "steam")
     {
         launchCommand = "start steam://rungameid/359550";
@@ -124,19 +125,19 @@ void launchGame(const std::string &edition)
     }
     else
     {
-        std::cerr << "未知的版本，无法启动游戏。" << std::endl;
+        cerr << "未知的版本，无法启动游戏。" << endl;
         return;
     }
 
-    std::cout << "正在启动 " << edition << " 版游戏..." << std::endl;
+    cout << "正在启动 " << edition << " 版游戏..." << endl;
     system(launchCommand.c_str());
 }
 
 int main()
 {
-    const std::string configPath = "config.cfg";
-    std::string gamePath;
-    std::string edition;
+    const string configPath = "config.cfg";
+    string gamePath;
+    string edition;
 
     // 读取配置
     if (!readConfig(configPath, gamePath, edition))
@@ -150,48 +151,48 @@ int main()
         system("cls");
 
         int choice;
-        std::cout << "当前游戏版本: " << edition << std::endl;
-        std::cout << "1. 切换版本\n2. 更新 defaultargs.dll\n3. 启动游戏\n4. 退出\n请选择一个选项: ";
-        if (!(std::cin >> choice))
+        cout << "当前游戏版本: " << edition << endl;
+        cout << "1. 切换版本\n2. 更新 defaultargs.dll\n3. 启动游戏\n4. 退出\n请选择一个选项: ";
+        if (!(cin >> choice))
         {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cerr << "无效输入，请输入数字。" << std::endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "无效输入，请输入数字。" << endl;
             continue;
         }
 
         if (choice == 1)
         {
             // 切换版本
-            std::string newEdition = getEditionFromUser();
-            std::string sourceDLL = newEdition + "/defaultargs.dll";
-            std::string destinationDLL = gamePath + "/defaultargs.dll";
+            string newEdition = getEditionFromUser();
+            string sourceDLL = newEdition + "/defaultargs.dll";
+            string destinationDLL = gamePath + "/defaultargs.dll";
 
             if (copyDLL(sourceDLL, destinationDLL))
             {
-                std::cout << "成功切换到 " << newEdition << " 版本。" << std::endl;
+                cout << "成功切换到 " << newEdition << " 版本。" << endl;
                 edition = newEdition;
                 writeEdition(configPath, gamePath, edition);
             }
             else
             {
-                std::cerr << "切换版本失败。" << std::endl;
+                cerr << "切换版本失败。" << endl;
             }
         }
         else if (choice == 2)
         {
             // 更新 defaultargs.dll
-            std::string currentEdition = getEditionFromUser();
-            std::string sourceDLL = gamePath + "/defaultargs.dll";
-            std::string destinationDLL = currentEdition + "/defaultargs.dll";
+            string currentEdition = getEditionFromUser();
+            string sourceDLL = gamePath + "/defaultargs.dll";
+            string destinationDLL = currentEdition + "/defaultargs.dll";
 
             if (copyDLL(sourceDLL, destinationDLL))
             {
-                std::cout << "成功更新 " << currentEdition << " 的 defaultargs.dll。" << std::endl;
+                cout << "成功更新 " << currentEdition << " 的 defaultargs.dll。" << endl;
             }
             else
             {
-                std::cerr << "更新 defaultargs.dll 失败。" << std::endl;
+                cerr << "更新 defaultargs.dll 失败。" << endl;
             }
         }
         else if (choice == 3)
@@ -206,12 +207,12 @@ int main()
         }
         else
         {
-            std::cerr << "无效的选择，请重新输入。" << std::endl;
+            cerr << "无效的选择，请重新输入。" << endl;
         }
 
-        std::cout << "按任意键返回主菜单...";
-        std::cin.ignore();
-        std::cin.get();
+        cout << "按任意键返回主菜单...";
+        cin.ignore();
+        cin.get();
     }
 
     return 0;
