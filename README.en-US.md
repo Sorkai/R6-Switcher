@@ -5,7 +5,7 @@
 ## Project Introduction
 This project is a small tool written in C++ for switching between the Steam and Uplay versions of Rainbow Six Siege by replacing the `defaultargs.dll` file. The tool also provides the ability to directly launch the game. It achieves version switching by reading and modifying a configuration file and supports updating the `defaultargs.dll` file to the corresponding program directory.
 
-[Releases, other downloads and feedback](https://www.sorkai.com/?p=228)
+[Releases, other downloads and feedback](https://www.sorkai.com/archives/228)
 
 Inspiration: [how to convert rainbow six between uplay and steam versions](https://www.bilibili.com/opus/230015736591751068)
 
