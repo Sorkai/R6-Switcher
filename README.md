@@ -7,6 +7,8 @@
 
 [版本发布、国内下载及问题反馈](https://www.sorkai.com/?p=228)
 
+灵感来源： [彩虹六号如何在uplay与steam版本之间转换](https://www.bilibili.com/opus/230015736591751068)
+
 ---
 
 ## 功能说明

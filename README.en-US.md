@@ -7,6 +7,8 @@ This project is a small tool written in C++ for switching between the Steam and 
 
 [Releases, other downloads and feedback](https://www.sorkai.com/?p=228)
 
+Inspiration: [how to convert rainbow six between uplay and steam versions](https://www.bilibili.com/opus/230015736591751068)
+
 ---
 
 ## Features
